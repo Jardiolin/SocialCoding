@@ -1,3 +1,4 @@
+from cgitb import text
 import urllib.parse
 import requests
 
@@ -12,7 +13,10 @@ while True:
     dest = input("Destination: ")
     if dest == "quit" or dest == "q":
         break
-    url = main_api + urllib.parse.urlencode({"key": key, "from":orig, "to":dest})
+    aVoid = input("Roads you want to avoid: ")
+    if dest == "quit" or dest == "q":
+        break
+    url = main_api + urllib.parse.urlencode({"key": key, "from":orig, "to":dest, "avoids": aVoid })
     url_2 = second_api + urllib.parse.urlencode({"key": key, "from":orig, "to":dest})
     json_data = requests.get(url).json()
     json_data_2 = requests.get(url_2).json()
@@ -24,6 +28,8 @@ while True:
         print("Highway: " + str((json_data_2["route"]["hasHighway"])))
         print("Toll Road: " + str((json_data_2["route"]["hasTollRoad"])))
         print("Unpaved Roads: " + str((json_data_2["route"]["hasUnpaved"])))
+        print("Estimated Time in Seconds: " + str((json_data_2["route"]["realTime"])))
+
         print("=============================================")
         print("Directions from " + (orig) + " to " + (dest))
         print("Trip Duration: " + (json_data["route"]["formattedTime"]))
