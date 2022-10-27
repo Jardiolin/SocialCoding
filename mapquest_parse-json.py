@@ -13,7 +13,7 @@ while True:
     dest = input("Destination: ")
     if dest == "quit" or dest == "q":
         break
-    rType = input("Route Type: ")
+    rType = input("Route Type (fastest, shortest, pedestrian, bicycle): ")
     if rType == "quit" or rType == "q":
         break
     url = main_api + urllib.parse.urlencode({"key": key, "from":orig, "to":dest, "routeType":rType})
