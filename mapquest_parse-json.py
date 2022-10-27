@@ -1,4 +1,3 @@
-from turtle import rt
 import urllib.parse
 import requests
 
@@ -17,12 +16,15 @@ while True:
     dest = input("Destination: ")
     if dest == "quit" or dest == "q":
         break
+    aVoid = input("Roads you want to avoid: ")
+    if aVoid == "quit" or aVoid == "q":
+        break
     # Prompt user for their desired routing type
     rType = input("Route Type (fastest, shortest, pedestrian, bicycle): ")
     if rType == "quit" or rType == "q":
         break
     # Modify API URL to insert key, starting location, destination and route type
-    url = main_api + urllib.parse.urlencode({"key": key, "from":orig, "to":dest, "routeType":rType})
+    url = main_api + urllib.parse.urlencode({"key": key, "from":orig, "to":dest, "routeType":rType, "avoids": aVoid})
     # Request JSON data from the URL
     json_data = requests.get(url).json()
     json_status = json_data["info"]["statuscode"]
@@ -41,6 +43,7 @@ while True:
         print("| Trip Duration: " + (json_data["route"]["formattedTime"]))
         # Display the total distance covered in kilometers
         print("| kilometer: " + str("{:.2f}".format((json_data["route"]["distance"])*(1.61))))
+        print("Estimated Time in Seconds: " + str((json_data_2["route"]["realTime"])))
         print("=============================================")
         print("| Directions: ")
         # Displays the step-by-step directions in order to go the desired destination
