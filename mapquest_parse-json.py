@@ -2,6 +2,7 @@ import urllib.parse
 import requests
 
 main_api = "https://www.mapquestapi.com/directions/v2/route?" 
+second_api = "http://www.mapquestapi.com/directions/v2/alternateroutes?"
 key = "4WQ7ADdJyfBK0yi7yuJGT3a7qW8JIVp7"
 
 while True:
@@ -12,17 +13,23 @@ while True:
     if dest == "quit" or dest == "q":
         break
     url = main_api + urllib.parse.urlencode({"key": key, "from":orig, "to":dest})
-    print("URL: " + (url))
+    url_2 = second_api + urllib.parse.urlencode({"key": key, "from":orig, "to":dest})
     json_data = requests.get(url).json()
+    json_data_2 = requests.get(url_2).json()
     json_status = json_data["info"]["statuscode"]
     if json_status == 0:
-        print("API Status: " + str(json_status) + " = A successful route call.\n")
+        print("=============================================")
+        print("Road Characteristics: ")
+        print("Ferry: " + str((json_data_2["route"]["hasFerry"])))
+        print("Highway: " + str((json_data_2["route"]["hasHighway"])))
+        print("Toll Road: " + str((json_data_2["route"]["hasTollRoad"])))
+        print("Unpaved Roads: " + str((json_data_2["route"]["hasUnpaved"])))
         print("=============================================")
         print("Directions from " + (orig) + " to " + (dest))
-        print("Trip Duration:   " + (json_data["route"]["formattedTime"]))
-        print("kilomete:           " + str("{:.2f}".format((json_data["route"]["distance"])*(1.61))))
-        print("Fuel Used (Ltr): " + str("{:.2f}".format((json_data["route"]["fuelUsed"])*(3.78))))
+        print("Trip Duration: " + (json_data["route"]["formattedTime"]))
+        print("kilometer: " + str("{:.2f}".format((json_data["route"]["distance"])*(1.61))))
         print("=============================================")
+        print("Directions: ")
         for each in json_data["route"]["legs"][0]["maneuvers"]:
             print((each["narrative"]) + " (" + str("{:.2f}".format((each["distance"])*1.61) + " km)"))
         print("=============================================\n")
@@ -39,3 +46,4 @@ while True:
         print("For Staus Code: " + str(json_status) + "; Refer to:")
         print("https://developer.mapquest.com/documentation/directions-api/status-codes")
         print("************************************************************************\n")
+
