@@ -1,4 +1,3 @@
-from turtle import rt
 import urllib.parse
 import requests
 
@@ -21,8 +20,12 @@ while True:
     rType = input("Route Type (fastest, shortest, pedestrian, bicycle): ")
     if rType == "quit" or rType == "q":
         break
+    # Prompts the user for the roads they want to avoid
+    aVoid = input("Roads you want to avoid: ")
+    if aVoid == "quit" or dest == "q":
+        break
     # Modify API URL to insert key, starting location, destination and route type
-    url = main_api + urllib.parse.urlencode({"key": key, "from":orig, "to":dest, "routeType":rType})
+    url = main_api + urllib.parse.urlencode({"key": key, "from":orig, "to":dest, "routeType":rType, "avoids":aVoid})
     # Request JSON data from the URL
     json_data = requests.get(url).json()
     json_status = json_data["info"]["statuscode"]
@@ -49,13 +52,13 @@ while True:
         print("=============================================\n")
     # If unsuccessful display status code and it meaning
     elif json_status == 402:
-        print("**********************************************")
+        print("************************************************************************")
         print("Status Code: " + str(json_status) + "; Invalid user inputs for one or both locations.")
-        print("**********************************************\n")
+        print("************************************************************************\n")
     elif json_status == 611:
-        print("**********************************************")
+        print("************************************************************************")
         print("Status Code: " + str(json_status) + "; Missing an entry for one or both locations.")
-        print("**********************************************\n")
+        print("************************************************************************\n")
     else:
         print("************************************************************************")
         print("For Staus Code: " + str(json_status) + "; Refer to:")
