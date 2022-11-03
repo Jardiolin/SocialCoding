@@ -43,6 +43,8 @@ while True:
         print("| Trip Duration: " + (json_data["route"]["formattedTime"]))
         # Display the total distance covered in kilometers
         print("| kilometer: " + str("{:.2f}".format((json_data["route"]["distance"])*(1.61))))
+        # Display the estimated trip duration in seconds
+        print("| Duration in Real-time: " + str((json_data["route"]["realTime"])))
         print("=============================================")
         print("| Directions: ")
         # Displays the step-by-step directions in order to go the desired destination
