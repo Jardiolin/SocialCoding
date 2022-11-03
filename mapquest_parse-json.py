@@ -16,7 +16,7 @@ while True:
     dest = input("Destination: ")
     if dest == "quit" or dest == "q":
         break
-    aVoid = input("Roads you want to avoid: ")
+    aVoid = input("Roads you want to avoid (limited access, toll road, unpaved, bridge): ")
     if aVoid == "quit" or aVoid == "q":
         break
     # Prompt user for their desired routing type
