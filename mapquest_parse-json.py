@@ -39,6 +39,7 @@ while True:
         print("| Unpaved Roads: " + str((json_data["route"]["hasUnpaved"])))
         print("| Seasonal Closure: " + str((json_data["route"]["hasSeasonalClosure"])))
         print("| Country Crossing: " + str((json_data["route"]["hasCountryCross"])))
+        print("| Bounding Box: " + str((json_data["route"]["boundingBox"])))
         print("=============================================")
         print("| Directions from " + (orig) + " to " + (dest))
         # Display the estimated trip duration
@@ -46,7 +47,7 @@ while True:
         # Display the total distance covered in kilometers
         print("| kilometer: " + str("{:.2f}".format((json_data["route"]["distance"])*(1.61))))
         # Display the estimated trip duration in seconds
-        print("| Duration in Real-time: " + str((json_data["route"]["realTime"])))
+        print("| Duration in Real-time: " + str((json_data["route"]["realTime"]))+" seconds")
         print("=============================================")
         print("| Directions: ")
         # Displays the step-by-step directions in order to go the desired destination
