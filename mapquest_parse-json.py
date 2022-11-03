@@ -16,16 +16,15 @@ while True:
     dest = input("Destination: ")
     if dest == "quit" or dest == "q":
         break
+    aVoid = input("Roads you want to avoid: ")
+    if aVoid == "quit" or aVoid == "q":
+        break
     # Prompt user for their desired routing type
     rType = input("Route Type (fastest, shortest, pedestrian, bicycle): ")
     if rType == "quit" or rType == "q":
         break
-    # Prompts the user for the roads they want to avoid
-    aVoid = input("Roads you want to avoid: ")
-    if aVoid == "quit" or dest == "q":
-        break
     # Modify API URL to insert key, starting location, destination and route type
-    url = main_api + urllib.parse.urlencode({"key": key, "from":orig, "to":dest, "routeType":rType, "avoids":aVoid})
+    url = main_api + urllib.parse.urlencode({"key": key, "from":orig, "to":dest, "routeType":rType, "avoids": aVoid})
     # Request JSON data from the URL
     json_data = requests.get(url).json()
     json_status = json_data["info"]["statuscode"]
