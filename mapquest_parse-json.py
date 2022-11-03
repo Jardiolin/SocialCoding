@@ -37,6 +37,8 @@ while True:
         print("| Highway: " + str((json_data["route"]["hasHighway"])))
         print("| Toll Road: " + str((json_data["route"]["hasTollRoad"])))
         print("| Unpaved Roads: " + str((json_data["route"]["hasUnpaved"])))
+        print("| Seasonal Closure: " + str((json_data["route"]["hasSeasonalClosure"])))
+        print("| Country Crossing: " + str((json_data["route"]["hasCountryCross"])))
         print("=============================================")
         print("| Directions from " + (orig) + " to " + (dest))
         # Display the estimated trip duration
