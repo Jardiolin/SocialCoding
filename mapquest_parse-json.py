@@ -14,7 +14,7 @@ while True:
     if dest == "quit" or dest == "q":
         break
     aVoid = input("Roads you want to avoid: ")
-    if dest == "quit" or dest == "q":
+    if aVoid == "quit" or aVoid == "q":
         break
     url = main_api + urllib.parse.urlencode({"key": key, "from":orig, "to":dest, "avoids": aVoid })
     url_2 = second_api + urllib.parse.urlencode({"key": key, "from":orig, "to":dest})
